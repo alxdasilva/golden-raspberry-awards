@@ -9,62 +9,51 @@ import { FormsModule } from '@angular/forms';
 })
 export class Table {
   @Input() title?: string;
-  @Input() columns: {
-    key: string;
-    label: string;
-    filterType?: 'text' | 'select';
-    filterOptions?: string[];
-  }[] = [];
+  @Input() columns: { key: string; label: string; filterType?: 'text' | 'select'; filterOptions?: string[]; }[] = [];
+
   @Input() set rows(value: any[]) {
     this._rows.set(value || []);
-    this.currentPage.set(1);
   }
 
   @Input() pagination = false;
   @Input() pageSize = 10;
 
+  @Input() totalElements: number = 0;
+  @Input() pageNumber: number = 0;
+  @Input() totalPagesInput: number = 1;
+  totalPagesSignal = signal<number>(this.totalPagesInput);
+  @Input() goToPageCallback?: (page: number) => void;
+
   private _rows = signal<any[]>([]);
   filters = signal<Record<string, string>>({});
-  currentPage = signal(1);
 
   filteredRows = computed(() => {
     let data = [...this._rows()];
-
     for (const key in this.filters()) {
       const value = this.filters()[key]?.toLowerCase();
       if (value) {
-        data = data.filter(row =>
-          row[key]?.toString().toLowerCase().includes(value)
-        );
+        data = data.filter(row => row[key]?.toString().toLowerCase().includes(value));
       }
     }
-
     return data;
   });
 
-  pagedRows = computed(() => {
-    if (!this.pagination) return this.filteredRows();
+  currentPage = computed(() => this.pageNumber + 1);
+  totalPages = computed(() => this.totalPagesInput);
+  pagedRows = computed(() => this.filteredRows());
 
-    const start = (this.currentPage() - 1) * this.pageSize;
-    return this.filteredRows().slice(start, start + this.pageSize);
-  });
-
-  totalPages = computed(() =>
-    Math.ceil(this.filteredRows().length / this.pageSize)
-  );
-
-  getPageArray() {
-    return Array.from({ length: this.totalPages() }, (_, i) => i + 1);
+  getPageArray(): number[] {
+    return Array.from({ length: this.totalPagesInput }, (_, i) => i + 1);
   }
 
   setFilter(colKey: string, value: string) {
     this.filters.update(f => ({ ...f, [colKey]: value }));
-    this.currentPage.set(1);
+    if (this.goToPageCallback) this.goToPageCallback(0);
   }
 
   goToPage(page: number) {
-    if (page >= 1 && page <= this.totalPages()) {
-      this.currentPage.set(page);
+    if (this.goToPageCallback && page >= 0 && page < this.totalPagesInput) {
+      this.goToPageCallback(page);
     }
   }
 }

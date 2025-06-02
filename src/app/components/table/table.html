@@ -40,21 +40,30 @@
         </tbody>
     </table>
 
+    <h1>teste {{pagination}} {{totalPages()}}</h1>
     @if (pagination && totalPages() > 1) {
-    <nav class="pagination-nav">
-        <ul class="pagination">
-            <li class="page-item" [class.disabled]="currentPage() === 1">
-                <button class="page-link" (click)="goToPage(currentPage() - 1)">‹</button>
-            </li>
-            @for (i of getPageArray(); track i) {
-            <li class="page-item" [class.active]="currentPage() === i">
-                <button class="page-link" (click)="goToPage(i)">{{ i }}</button>
-            </li>
-            }
-            <li class="page-item" [class.disabled]="currentPage() === totalPages()">
-                <button class="page-link" (click)="goToPage(currentPage() + 1)">›</button>
-            </li>
-        </ul>
-    </nav>
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <small class="text-muted">
+            Página {{ currentPage() }} de {{ totalPages() }}
+        </small>
+
+        <nav class="pagination-nav">
+            <ul class="pagination mb-0">
+                <li class="page-item" [class.disabled]="currentPage() === 1">
+                    <button class="page-link" (click)="goToPage(currentPage() - 2)">«</button>
+                </li>
+
+                @for (i of getPageArray(); track i) {
+                <li class="page-item" [class.active]="currentPage() === i">
+                    <button class="page-link" (click)="goToPage(i - 1)">{{ i }}</button>
+                </li>
+                }
+
+                <li class="page-item" [class.disabled]="currentPage() === totalPages()">
+                    <button class="page-link" (click)="goToPage(currentPage())">»</button>
+                </li>
+            </ul>
+        </nav>
+    </div>
     }
 </div>

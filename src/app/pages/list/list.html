@@ -1,8 +1,12 @@
 <app-card [title]="'List Movies'">
-  <app-table [title]="'List movie winners by year'" [pagination]="true" [pageSize]="15" [columns]="[
+  <app-table [title]="'List movies'" [columns]="[
   { key: 'id', label: 'Id' },
   { key: 'year', label: 'Year', filterType: 'text' },
   { key: 'title', label: 'Title' },
   { key: 'winner', label: 'Winner?', filterType: 'select', filterOptions: ['Yes', 'No'] }
-]" [rows]="movies()"></app-table>
+]" [rows]="movies()" [pagination]="true" [pageNumber]="page()" [totalPagesInput]="totalPages()"
+    [totalElements]="totalElements()" [goToPageCallback]="getMovies" />
+
+  <p>Total de Páginas: {{ totalPages() }}</p>
+
 </app-card>

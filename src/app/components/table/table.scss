@@ -44,15 +44,47 @@
     .pagination-nav {
         display: flex;
         justify-content: center;
-        margin-top: 1rem;
+        margin-top: 1.5rem;
 
         .pagination {
-            margin: 0;
-        }
+            display: flex;
+            list-style: none;
+            padding: 0;
+            gap: 0.25rem;
 
-        .page-item {
-            .page-link {
-                padding: 0.4rem 0.75rem;
+            .page-item {
+                .page-link {
+                    background-color: white;
+                    color: var(--primary);
+                    border: 1px solid var(--primary);
+                    padding: 0.4rem 0.75rem;
+                    font-size: 0.85rem;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: all 0.2s ease-in-out;
+
+                    &:hover {
+                        background-color: var(--primary);
+                        color: white;
+                    }
+
+                    &:disabled,
+                    .disabled & {
+                        cursor: not-allowed;
+                        opacity: 0.5;
+                    }
+                }
+
+                &.active .page-link {
+                    background-color: var(--primary);
+                    color: white;
+                    font-weight: bold;
+                }
+
+                &.disabled .page-link {
+                    pointer-events: none;
+                    opacity: 0.5;
+                }
             }
         }
     }

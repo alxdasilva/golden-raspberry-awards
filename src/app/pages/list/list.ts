@@ -13,28 +13,30 @@ import { Movie } from '../../services/movie';
 export class List implements OnInit {
 
   private readonly movieService = inject(Movie);
-  moviesWithMultipleWinners = signal<any>(null);
-  movies = signal([
-    { id: 1, year: 1980, title: 'Cruising', winner: 'No' },
-    { id: 2, year: 1980, title: 'The Formula', winner: 'No' },
-    { id: 3, year: 1980, title: 'Can\'t Stop the Music', winner: 'Yes' },
-    { id: 5, year: 1981, title: 'Mommie Dearest', winner: 'Yes' },
-    { id: 6, year: 1981, title: 'Mommie Dearest', winner: 'Yes' },
-    { id: 7, year: 1981, title: 'Mommie Dearest', winner: 'Yes' },
-    { id: 8, year: 1981, title: 'Mommie Dearest', winner: 'Yes' },
-    { id: 9, year: 1981, title: 'Mommie Dearest', winner: 'Yes' },
-    { id: 10, year: 1981, title: 'Mommie Dearest', winner: 'Yes' },
-    { id: 11, year: 1981, title: 'Mommie Dearest', winner: 'Yes' }
-  ]);
+  movies = signal<Movie[]>([]);
+  page = signal(0);
+  totalPages = signal(1);
+  totalElements = signal(0);
+  columns = [
+    { key: 'id', label: 'Id' },
+    { key: 'year', label: 'Year', filterType: 'text' },
+    { key: 'title', label: 'Title' },
+    { key: 'winner', label: 'Winner?', filterType: 'select', filterOptions: ['Yes', 'No'] }
+  ];
 
   ngOnInit(): void {
-    this.getMovies();
+    this.getMovies(0);
   }
 
-  getMovies(): void {
-    this.movieService.getMovies().subscribe(data => {
-      this.moviesWithMultipleWinners.set(data);
-      console.log(data)
+  getMovies(pageNumber: number): void {
+    this.movieService.getMovies(pageNumber).subscribe((response: any) => {
+      const movies = response?._embedded?.movies ?? [];
+
+      this.movies.set(movies);
+      this.page.set(response?.page?.number ?? 0);
+      this.totalPages.set(response?.page?.totalPages ?? 1);
+      this.totalElements.set(response?.page?.totalElements ?? movies.length);
     });
   }
+
 }
