@@ -55,7 +55,6 @@ export class Table {
         if (key === 'winner') {
           if (value === 'Yes') return rowValue === true;
           if (value === 'No') return rowValue === false;
-          return true;
         }
 
         return rowValue?.toString().toLowerCase().includes(value.toLowerCase());
