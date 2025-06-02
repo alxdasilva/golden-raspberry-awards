@@ -7,6 +7,7 @@ import {
   MovieResponse,
   StudiosWithWinCount,
   WinIntervals,
+  WinnerByYear,
   YearsWithMultipleWinners,
 } from '../../models/movie';
 import { ProjectionType } from '../../models/projection';
@@ -27,7 +28,7 @@ export class Dashboard {
   studiosWithWinCount = signal<StudiosWithWinCount>({ studios: [] });
   maxInterval = signal<MinMax[]>([]);
   minInterval = signal<MinMax[]>([]);
-  winnersByYear = signal<MovieResponse[]>([]);
+  winnersByYear = signal<WinnerByYear[]>([]);
 
   ngOnInit(): void {
     this.getYearsWithMultipleWinners();
@@ -71,6 +72,7 @@ export class Dashboard {
   getWinnersByYear(newValue: string): void {
     const numberValue = Number(newValue);
     if (!isNaN(numberValue)) {
+      this.movieService.getWinnersByYear(numberValue).subscribe(data => this.winnersByYear.set(data))
     }
   }
 }

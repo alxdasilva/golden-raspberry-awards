@@ -21,8 +21,8 @@ export class Movie {
     return this.http.get<T>(`${this.baseUrl + this.apiPath}`, { params });
   }
 
-  getWinnersByYear(year: number): Observable<WinnerByYear | WinnerByYear[]> {
-    return this.http.get<WinnerByYear | WinnerByYear[]>(
+  getWinnersByYear(year: number): Observable<WinnerByYear[]> {
+    return this.http.get<WinnerByYear[]>(
       `${this.baseUrl + this.apiPath}?winner=true&year=${year}`
     );
   }
