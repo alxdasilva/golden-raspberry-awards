@@ -8,22 +8,20 @@ import { WinnerByYear } from '../models/movie';
 })
 export class Movie {
   private http = inject(HttpClient);
-  private baseUrl = 'https://challenge.outsera.tech';
-  private apiPath = '/api/movies';
-  private moviesPath = '/movies';
+  private baseUrl = 'https://challenge.outsera.tech/api/movies';
 
   getMovies(params: HttpParams) {
-    return this.http.get<any>(this.moviesPath, { params });
+    return this.http.get<any>(this.baseUrl, { params });
   }
 
   getProjection<T>(projectionType: string): Observable<T> {
     const params = new HttpParams().set('projection', projectionType);
-    return this.http.get<T>(`${this.baseUrl + this.apiPath}`, { params });
+    return this.http.get<T>(`${this.baseUrl}`, { params });
   }
 
   getWinnersByYear(year: number): Observable<WinnerByYear[]> {
     return this.http.get<WinnerByYear[]>(
-      `${this.baseUrl + this.apiPath}?winner=true&year=${year}`
+      `${this.baseUrl}?winner=true&year=${year}`
     );
   }
 }

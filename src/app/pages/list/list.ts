@@ -1,3 +1,4 @@
+import { Content, ListMovies, Pageable } from './../../models/movie';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Table } from '../../components/table/table';
 import { Card } from '../../components/card/card';
@@ -13,7 +14,7 @@ import { HttpParams } from '@angular/common/http';
 })
 export class List implements OnInit {
   private readonly movieService = inject(Movie);
-  movies = signal<Movie[]>([]);
+  movies = signal<Content[]>([]);
   page = signal(0);
   totalPages = signal(1);
   totalElements = signal(0);
@@ -44,18 +45,21 @@ export class List implements OnInit {
       .set('page', page.toString())
       .set('size', '15');
 
+
     if (filters['winner'] === 'Yes') {
       params = params.set('winner', 'true');
     } else if (filters['winner'] === 'No') {
       params = params.set('winner', 'false');
     }
+    if (filters?.['year']) {
+      params = params.set('year', filters['year'])
+    }
 
-    this.movieService.getMovies(params).subscribe((response: any) => {
-      const movies = response?._embedded?.movies ?? [];
-      this.movies.set(movies);
-      this.page.set(response?.page?.number ?? 1);
-      this.totalPages.set(response?.page?.totalPages ?? 1);
-      this.totalElements.set(response?.page?.totalElements ?? movies.length);
+    this.movieService.getMovies(params).subscribe((response: ListMovies) => {
+      this.movies.set(response?.content ?? []);
+      this.page.set(response?.pageable?.pageNumber ?? 1);
+      this.totalPages.set(response?.pageable?.pageSize ?? 1);
+      this.totalElements.set(response?.totalElements);
     });
   };
 }

@@ -1,47 +1,3 @@
-export interface MovieLink {
-    href: string;
-}
-
-export interface MovieLinks {
-    self: MovieLink;
-    movie: MovieLink;
-}
-
-export interface MovieResponse {
-    year: number;
-    title: string;
-    studios: string[];
-    producers: string[];
-    winner: boolean;
-    _links: MovieLinks;
-}
-
-export interface EmbeddedMovies {
-    movies: MovieResponse[];
-}
-
-export interface Pagination {
-    size: number;
-    totalElements: number;
-    totalPages: number;
-    number: number;
-}
-
-export interface ApiLinks {
-    first: MovieLink;
-    self: MovieLink & { templated?: boolean };
-    next: MovieLink;
-    last: MovieLink;
-    profile: MovieLink;
-    search: MovieLink;
-}
-
-export interface MovieApiResponse {
-    _embedded: EmbeddedMovies;
-    _links: ApiLinks;
-    page: Pagination;
-}
-
 export interface YearsWithMultipleWinners {
     years: Year[];
 }
@@ -79,4 +35,42 @@ export interface WinnerByYear {
     studios: string[];
     producers: string[];
     winner: boolean;
+}
+
+export interface ListMovies {
+    content: Content[];
+    pageable: Pageable;
+    totalPages: number;
+    totalElements: number;
+    last: boolean;
+    size: number;
+    number: number;
+    sort: Sort;
+    numberOfElements: number;
+    first: boolean;
+    empty: boolean;
+}
+
+export interface Content {
+    id: number;
+    year: number;
+    title: string;
+    studios: string[];
+    producers: string[];
+    winner: boolean;
+}
+
+export interface Pageable {
+    sort: Sort;
+    offset: number;
+    pageSize: number;
+    pageNumber: number;
+    paged: boolean;
+    unpaged: boolean;
+}
+
+export interface Sort {
+    unsorted: boolean;
+    sorted: boolean;
+    empty: boolean;
 }

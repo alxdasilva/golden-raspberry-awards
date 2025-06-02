@@ -79,7 +79,7 @@ export class Table {
   }
 
   goToPage(page: number) {
-    if (this.goToPageCallback && page >= 1 && page <= this.totalPages()) {
+    if (this.goToPageCallback && page <= this.totalPages()) {
       this.goToPageCallback({ page, filters: this.filters() });
     }
   }

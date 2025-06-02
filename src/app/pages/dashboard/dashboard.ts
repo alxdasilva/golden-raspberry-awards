@@ -4,7 +4,6 @@ import { Card } from '../../components/card/card';
 import { Movie } from '../../services/movie';
 import {
   MinMax,
-  MovieResponse,
   StudiosWithWinCount,
   WinIntervals,
   WinnerByYear,
