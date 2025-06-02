@@ -88,3 +88,14 @@ ng test
 - API Integration – Connects to the Golden Raspberry Awards API for real-time data retrieval.
 
 - Documentation & Repository Management – The code is fully documented and hosted on Git platforms.
+
+## Color Palette
+
+| Color               | Scsss Variable | Hex Code | Description |
+|------| -----| ----|----|
+| Primary | $primary | #2c2f34 | Main background color and darker ui
+| Secondary | $secondary | #f5f5fa | Light background and neutral elements
+| Interactive | $interactive | #0d6efd | Interactive elements such as buttons and links
+| Gray Light | $gray-ligh | #ebebeb | For borders and background
+| Gray medium | $gray-medium | #9b909f | For text and subtle UI elements
+| Gray dark | $gray-dark | #2c2f34 | Headers and strong contrast areas
