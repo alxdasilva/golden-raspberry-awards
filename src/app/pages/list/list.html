@@ -1,0 +1,8 @@
+<app-card [title]="'List Movies'">
+  <app-table [title]="'List movie winners by year'" [pagination]="true" [pageSize]="15" [columns]="[
+  { key: 'id', label: 'Id' },
+  { key: 'year', label: 'Year', filterType: 'text' },
+  { key: 'title', label: 'Title' },
+  { key: 'winner', label: 'Winner?', filterType: 'select', filterOptions: ['Yes', 'No'] }
+]" [rows]="movies()"></app-table>
+</app-card>

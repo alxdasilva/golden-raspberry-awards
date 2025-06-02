@@ -1,0 +1,16 @@
+$primary: #2c2f34;
+$secondary: #f5f5fa;
+$interactive: #0d6efd;
+$gray-light: #ebebeb;
+$gray-medium: #9b909f;
+$gray-dark: #2c2f34;
+
+
+:root {
+    --primary: #{$primary};
+    --secondary: #{$secondary};
+    --interactive: #{$interactive};
+    --gray-light: #{$gray-light};
+    --gray-medium: #{$gray-medium};
+    --gray-dark: #{$gray-dark};
+}

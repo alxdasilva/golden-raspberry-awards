@@ -1,0 +1,56 @@
+<div class="dashboard">
+  <div class="grid-container">
+    <section id="moviesWithMultipleWinners">
+      <app-card [title]="'List years with multiple winners'">
+        <app-table [columns]="[
+          { key: 'year', label: 'Year' },
+          { key: 'winnerCount', label: 'Win Count' },
+        ]" [rows]="moviesWithMultipleWinners().years"></app-table>
+      </app-card>
+    </section>
+
+    <section id="moviesWithMultipleWinners">
+      <app-card [title]="'Top 3 studios with winners'">
+        <app-table [columns]="[
+          { key: 'name', label: 'Name' },
+          { key: 'winCount', label: 'Win Count' },
+        ]" [rows]="studiosWithWinCount().studios"></app-table>
+      </app-card>
+    </section>
+
+    <section id="winIntervals">
+      <app-card [title]="'Produces with longest and shortest interval between wins'">
+        <app-table [title]="'Maximum'" [columns]="[
+          { key: 'producer', label: 'Producer' },
+          { key: 'interval', label: 'Interval' },
+          { key: 'previousWin', label: 'Previous Year' },
+          { key: 'followingWin', label: 'Following Year' },
+        ]" [rows]="maxInterval()"></app-table>
+
+        <app-table [title]="'Minimum'" [columns]="[
+          { key: 'producer', label: 'Producer' },
+          { key: 'interval', label: 'Interval' },
+          { key: 'previousWin', label: 'Previous Year' },
+          { key: 'followingWin', label: 'Following Year' },
+      ]" [rows]="minInterval()"></app-table>
+      </app-card>
+
+    </section>
+
+    <section id="movieWinnerByYear">
+      <app-card [title]="'List movie winners by year'">
+        <div class="search-container">
+          <input class="search-container-year" type="number" #inputNumber
+            (keyup.enter)="getWinnersByYear(inputNumber.value)" placeholder="Search by user">
+          <button class="search-container-btn material-symbols-outlined"
+            (click)="getWinnersByYear(inputNumber.value)">search</button>
+        </div>
+        <app-table [columns]="[
+          { key: 'id', label: 'Id' },
+          { key: 'year', label: 'Year' },
+          { key: 'title', label: 'Title' },
+        ]" [rows]="winnersByYear()"></app-table>
+      </app-card>
+    </section>
+  </div>
+</div>

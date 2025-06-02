@@ -1,0 +1,44 @@
+.dashboard {
+    .search-container {
+        display: flex;
+        margin-bottom: 1rem;
+
+        &-year {
+            margin-right: 0.5rem;
+            width: 100%;
+            border: 2px solid var(--gray-light);
+            padding: 8px;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        &-btn {
+            background-color: var(--interactive);
+            border-radius: 4px;
+            outline: none;
+            border: 2px solid red;
+            border: 2px solid var(--interactive);
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    }
+
+    .grid-container {
+        display: grid;
+        gap: 20px;
+    }
+
+    @media (min-width: 1000px) {
+        .grid-container {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto auto;
+        }
+    }
+
+    @media (max-width: 999px) {
+        .grid-container {
+            grid-template-columns: 1fr;
+        }
+    }
+}

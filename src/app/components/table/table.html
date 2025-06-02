@@ -1,0 +1,60 @@
+<div class="table-wrapper">
+    @if (title) {
+    <h5>{{ title }}</h5>
+    }
+
+    <table class="table table-bordered table-striped mt-2">
+        <thead>
+            <tr>
+                @for (col of columns; track col) {
+                <th>
+                    {{ col.label }}
+
+                    @switch (col.filterType) {
+                    @case ('text') {
+                    <input class="form-control mt-1" [placeholder]="'Filter by ' + col.label"
+                        [(ngModel)]="filters()[col.key]" (ngModelChange)="setFilter(col.key, $event)" />
+                    }
+                    @case ('select') {
+                    <select class="form-control mt-1" [(ngModel)]="filters()[col.key]"
+                        (ngModelChange)="setFilter(col.key, $event)">
+                        <option value="">All</option>
+                        @for (opt of col.filterOptions; track opt) {
+                        <option [value]="opt">{{ opt }}</option>
+                        }
+                    </select>
+                    }
+                    }
+                </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (row of pagedRows(); track row) {
+            <tr>
+                @for (col of columns; track col) {
+                <td>{{ row[col.key] }}</td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (pagination && totalPages() > 1) {
+    <nav class="pagination-nav">
+        <ul class="pagination">
+            <li class="page-item" [class.disabled]="currentPage() === 1">
+                <button class="page-link" (click)="goToPage(currentPage() - 1)">‹</button>
+            </li>
+            @for (i of getPageArray(); track i) {
+            <li class="page-item" [class.active]="currentPage() === i">
+                <button class="page-link" (click)="goToPage(i)">{{ i }}</button>
+            </li>
+            }
+            <li class="page-item" [class.disabled]="currentPage() === totalPages()">
+                <button class="page-link" (click)="goToPage(currentPage() + 1)">›</button>
+            </li>
+        </ul>
+    </nav>
+    }
+</div>
