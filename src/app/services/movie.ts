@@ -15,7 +15,7 @@ export class Movie {
     return this.http.get<any>(this.baseUrl, { params });
   }
 
-  getProjection<T>(projectionType: ProjectionType): Observable<T> {
+  getProjection<T>(projectionType: string): Observable<T> {
     const params = new HttpParams().set('projection', projectionType);
     return this.http.get<T>(`${this.baseUrl}`, { params });
   }
