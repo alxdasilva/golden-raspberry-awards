@@ -1,7 +1,22 @@
 # GoldenRaspberryAwards
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
+Application with an interface to enable reading the list of nominees and winners in the Worst Picture category of the Golden Raspberry Awards.
 
+## How to run
+1. Clone the project:
+
+```bash
+git clone git@github.com:alxdasilva/golden-raspberry-awards.git
+```
+2. Navigate to the project directory:
+```bash
+cd golden-raspberry-awards
+```
+3. Install dependencies
+```bash
+npm install
+```
 ## Development server
 
 To start a local development server, run:
@@ -43,17 +58,33 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 ```bash
 ng test
 ```
+## API Documentation
 
-## Running end-to-end tests
+#### Retrieve Movies with Filters
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```http
+  GET https://challenge.outsera.tech/api/movies
 ```
+#### Query Parameters:
+| Parameter   | Type       | Description                           |
+| :---------- | :--------- | :---------------------------------- |
+| `page` | `number` | Page number |
+| `size` | `number` | Page size |
+| `winner` | `boolean` | Filter movies by winner (true or false) |
+| `year` | `number` | Filter movies by year |
+| `proection` | `string` | Type of projection to retrieve (YEARS_WITH_MULTIPLE_WINNERS, STUDIOS_WITH_WIN_COUNT, MAX_MIN_WIN_INTERVAL_FOR_PRODUCERS) |
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-## Additional Resources
+## Functionalities
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Movie Filtering – Retrieve a list of nominated and winning movies using filters like year and winner status.
+
+- Data Projections – Fetch specific projections, such as years with multiple winners.
+
+- Responsive Design – Optimized for a minimum resolution of 768x1280.
+
+- Clean Code & Best Practices – Well-structured components, indentation, and high readability.
+
+- API Integration – Connects to the Golden Raspberry Awards API for real-time data retrieval.
+
+- Documentation & Repository Management – The code is fully documented and hosted on Git platforms.

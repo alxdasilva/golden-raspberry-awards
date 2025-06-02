@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WinnerByYear } from '../models/movie';
+import { ProjectionType } from '../models/projection';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class Movie {
     return this.http.get<any>(this.baseUrl, { params });
   }
 
-  getProjection<T>(projectionType: string): Observable<T> {
+  getProjection<T>(projectionType: ProjectionType): Observable<T> {
     const params = new HttpParams().set('projection', projectionType);
     return this.http.get<T>(`${this.baseUrl}`, { params });
   }
