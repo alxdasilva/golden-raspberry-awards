@@ -4,21 +4,15 @@ import { Observable } from 'rxjs';
 import { WinnerByYear } from '../models/movie';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class Movie {
   private http = inject(HttpClient);
   private baseUrl = 'https://challenge.outsera.tech';
   private apiPath = '/api/movies';
   private moviesPath = '/movies';
-  private pageSignal = signal<number>(1);
 
-  getMovies(pageNumber: number, size: number = 15) {
-    const params = new HttpParams()
-      .set('page', this.pageSignal())
-      .set('size', size.toString())
-      .set('year', 1982);
-
+  getMovies(params: HttpParams) {
     return this.http.get<any>(this.moviesPath, { params });
   }
 
@@ -28,7 +22,8 @@ export class Movie {
   }
 
   getWinnersByYear(year: number): Observable<WinnerByYear | WinnerByYear[]> {
-    return this.http.get<WinnerByYear | WinnerByYear[]>(`${this.baseUrl + this.apiPath}?winner=true&year=${year}`);
+    return this.http.get<WinnerByYear | WinnerByYear[]>(
+      `${this.baseUrl + this.apiPath}?winner=true&year=${year}`
+    );
   }
-
 }

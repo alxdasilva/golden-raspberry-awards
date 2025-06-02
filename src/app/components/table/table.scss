@@ -1,91 +1,80 @@
 .table-wrapper {
-    h5 {
-        font-size: 1rem;
-        margin: 0.5rem;
-        font-weight: normal;
+  h5 {
+    font-size: 1rem;
+    margin: 0.5rem;
+    font-weight: normal;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      background-color: var(--secondary);
+      font-weight: bold;
+      font-size: 0.9rem;
     }
 
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-
-        thead {
-            background-color: var(--secondary);
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        th,
-        td {
-            font-size: 0.9rem;
-            padding: 0.75rem;
-            border: 1px solid var(--gray-light);
-            text-align: left;
-            vertical-align: middle;
-        }
-
-        tbody tr:nth-child(odd) {
-            background-color: #ffffff;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: var(--secondary);
-        }
-
-        input,
-        select {
-            width: 100%;
-            font-size: 0.75rem;
-            padding: 0.3rem;
-            margin-top: 0.25rem;
-        }
+    th,
+    td {
+      font-size: 0.9rem;
+      padding: 0.75rem;
+      border: 1px solid var(--gray-light);
+      text-align: left;
+      vertical-align: middle;
     }
 
-    .pagination-nav {
-        display: flex;
-        justify-content: center;
-        margin-top: 1.5rem;
-
-        .pagination {
-            display: flex;
-            list-style: none;
-            padding: 0;
-            gap: 0.25rem;
-
-            .page-item {
-                .page-link {
-                    background-color: white;
-                    color: var(--primary);
-                    border: 1px solid var(--primary);
-                    padding: 0.4rem 0.75rem;
-                    font-size: 0.85rem;
-                    border-radius: 4px;
-                    cursor: pointer;
-                    transition: all 0.2s ease-in-out;
-
-                    &:hover {
-                        background-color: var(--primary);
-                        color: white;
-                    }
-
-                    &:disabled,
-                    .disabled & {
-                        cursor: not-allowed;
-                        opacity: 0.5;
-                    }
-                }
-
-                &.active .page-link {
-                    background-color: var(--primary);
-                    color: white;
-                    font-weight: bold;
-                }
-
-                &.disabled .page-link {
-                    pointer-events: none;
-                    opacity: 0.5;
-                }
-            }
-        }
+    tbody tr:nth-child(odd) {
+      background-color: #ffffff;
     }
+
+    tbody tr:nth-child(even) {
+      background-color: var(--secondary);
+    }
+
+    input,
+    select {
+      width: 100%;
+      font-size: 0.75rem;
+      padding: 0.3rem;
+      margin-top: 0.25rem;
+    }
+  }
+
+  .pagination-nav {
+    display: flex;
+    justify-content: center;
+    background-color: var(--secondary);
+    .pagination {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .page-item {
+      .page-link {
+        background-color: transparent;
+        border: none;
+        padding: 0.4rem 0.5rem;
+        font-weight: bold;
+        color: var(--gray-medium);
+        cursor: pointer;
+
+        &:hover {
+          background-color: #e6f0ff;
+        }
+      }
+
+      &.active .page-link {
+        background-color: var(--interactive);
+        color: white;
+      }
+
+      &.disabled .page-link {
+        color: #ccc;
+        cursor: not-allowed;
+      }
+    }
+  }
 }

@@ -6,7 +6,4 @@
   { key: 'winner', label: 'Winner?', filterType: 'select', filterOptions: ['Yes', 'No'] }
 ]" [rows]="movies()" [pagination]="true" [pageNumber]="page()" [totalPagesInput]="totalPages()"
     [totalElements]="totalElements()" [goToPageCallback]="getMovies" />
-
-  <p>Total de Páginas: {{ totalPages() }}</p>
-
 </app-card>

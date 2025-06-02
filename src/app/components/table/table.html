@@ -16,12 +16,10 @@
                         [(ngModel)]="filters()[col.key]" (ngModelChange)="setFilter(col.key, $event)" />
                     }
                     @case ('select') {
-                    <select class="form-control mt-1" [(ngModel)]="filters()[col.key]"
-                        (ngModelChange)="setFilter(col.key, $event)">
+                    <select class="form-control mt-1" [(ngModel)]="filters()[col.key]" (ngModelChange)="setFilter(col.key, $event)">
                         <option value="">All</option>
-                        @for (opt of col.filterOptions; track opt) {
-                        <option [value]="opt">{{ opt }}</option>
-                        }
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
                     </select>
                     }
                     }
@@ -33,20 +31,20 @@
             @for (row of pagedRows(); track row) {
             <tr>
                 @for (col of columns; track col) {
-                <td>{{ row[col.key] }}</td>
+                <td>
+                    @if (col.key === 'winner') {
+                    {{ row[col.key] === true ? 'Yes' : row[col.key] === false ? 'No' : '' }}
+                    } @else {
+                    {{ row[col.key] }}
+                    } </td>
                 }
             </tr>
             }
         </tbody>
     </table>
 
-    <h1>teste {{pagination}} {{totalPages()}}</h1>
     @if (pagination && totalPages() > 1) {
     <div class="d-flex justify-content-between align-items-center mt-3">
-        <small class="text-muted">
-            Página {{ currentPage() }} de {{ totalPages() }}
-        </small>
-
         <nav class="pagination-nav">
             <ul class="pagination mb-0">
                 <li class="page-item" [class.disabled]="currentPage() === 1">
